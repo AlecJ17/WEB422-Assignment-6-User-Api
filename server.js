@@ -70,6 +70,19 @@ app.post('/api/user/login', (req, res) => {
         });
 });
 
+app.post('/api/user/register', (req, res) => {
+    userService.registerUser(req.body)
+        .then((msg) => {
+            res.json({ message: msg }); // Return success message
+        })
+        .catch((err) => {
+            console.error("Registration error:", err); // Log the error for debugging
+            res.status(422).json({ message: err }); // Return the error message
+        });
+});
+
+
+
 app.get('/api/user/favourites', passport.authenticate('jwt', { session: false }), (req, res) => {
     userService.getFavourites(req.user._id)
         .then(data => {
