@@ -15,12 +15,9 @@
 const express = require('express');
 const passport = require('passport');
 const cors = require('cors');
-const dotenv = require('dotenv');
 const userService = require('./user-service.js');
 const jwt = require('jsonwebtoken');
 const passportJWT = require('passport-jwt');
-const mongoose = require('mongoose');
-
 require('dotenv').config();
 
 const app = express();
@@ -54,6 +51,10 @@ userService.connect()
 
 app.get("/", (req, res) => {
     res.json({ message: "User API is running." });
+});
+
+app.get("/api/user", (req, res) => {
+    res.json({ message: "api/user is running." });
 });
 
 app.post('/api/user/login', (req, res) => {
